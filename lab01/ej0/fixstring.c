@@ -60,8 +60,10 @@ bool fstring_less_eq(fixstring s1, fixstring s2) {
         if (s1[length] < s2[length])
             return smaller;
         else
-            if (s1[length] > s2[length])
+            if (s1[length] > s2[length]) {
                 smaller = false;
+                return smaller;
+            }
     }
 
     return smaller;

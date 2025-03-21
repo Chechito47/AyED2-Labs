@@ -109,12 +109,13 @@ char get_winner(char board[3][3])
 bool has_free_cell(char board[3][3])
 {
     bool free_cell=false;
-    
-    for (int row = 0; row < 3; ++row) {
-        for (int column = 0; column < 3; ++column) {
+
+    for (int row = 0; row < 3 && !free_cell; ++row) {
+        for (int column = 0; column < 3 && !free_cell; ++column) {
             if ((board[row][column]) == '-')
                 free_cell = true;
         }
+        //free_cell = board[row][column] == '-' | free_cell;
     }
     return free_cell;
 }

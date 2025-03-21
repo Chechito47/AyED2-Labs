@@ -33,13 +33,16 @@ struct bound_data check_bound(int value, int arr[], unsigned int length) {
         if (value < arr[i]) {
             res.is_upperbound = false;
         }
+        //res.is_upperbound = value >= arr[i] && res.is_upperbound;
         if (value > arr[i]) {
             res.is_lowerbound = false;
         }
+        //res.is_lowerbound = value <= arr[i] && res.is_lowerbound;
         if (value == arr[i]) {
             res.exists = true;
             res.where = i;
         }
+        //res.exists = value == arr[i] | res.exists;
     }
 
     return res;
