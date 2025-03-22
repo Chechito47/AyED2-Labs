@@ -9,9 +9,13 @@
 /*
  * Note: insert_proc from theory is insert_sort here. 
  * We have to implement insert starting from 0.
+ * void(lenght) is to avoid unused variable and allow debugging.
 */
 static void insert(int a[], unsigned int i, unsigned int length) {
+    (void)length;
+    #ifdef DEBUG
     array_dump(a, length);
+    #endif
     unsigned int j = i;
     while (j > 0 && goes_before(a[j], a[j-1])) {
         swap(a, j-1, j);
