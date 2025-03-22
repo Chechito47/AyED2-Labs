@@ -6,17 +6,30 @@
 #include "sort_helpers.h"
 #include "sort.h"
 
+/*
+ * Note: partition return uint asserting lft <= ppiv <= rgt
+ * We don't have to check izq <= ppiv because quick_sort_rec takes ppiv -1
+ * IDEM with der <= ppiv.
+ */
+static void quick_sort_rec(int a[], unsigned int izq, unsigned int der, unsigned int length) {
+    (void)length;
+    #ifdef DEBUG
+    array_dump(a, length);
+    #endif
 
-static void quick_sort_rec(int a[], unsigned int izq, unsigned int der) {
- /* needs implementation */
+    if (izq >= der)
+        return;
 
-    /* no implementes partition, ya está implementado en sort_helpers.o
-       (no se puede leer, pero en sort_helpers.h vas a encontrar información
-        para saber cómo usarlo)
-    */
+    unsigned int ppiv = partition(a, izq, der);
+
+    if (izq < ppiv)
+        quick_sort_rec(a, izq, ppiv - 1, length);
+    
+    if (der > ppiv)
+        quick_sort_rec(a, ppiv + 1, der, length);
 }
 
 void quick_sort(int a[], unsigned int length) {
-    quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1);
+    quick_sort_rec(a, 0, (length == 0) ? 0 : length - 1, length);
 }
 
