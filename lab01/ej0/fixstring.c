@@ -15,7 +15,7 @@ unsigned int fstring_length(fixstring s) {
     while (s[length] != '\0' && length < FIXSTRING_MAX)
         length++;
 
-    return length; 
+    return length;
 }
 
 /*
