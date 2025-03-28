@@ -14,7 +14,7 @@
 static void insert(int a[], unsigned int i, unsigned int length) {
     (void)length;
     #ifdef DEBUG
-    array_dump(a, length);
+    array_dump(a, length); printf("\n");
     #endif
     unsigned int j = i;
     while (j > 0 && goes_before(a[j], a[j-1])) {

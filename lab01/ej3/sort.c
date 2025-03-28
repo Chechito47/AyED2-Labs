@@ -43,11 +43,10 @@ static unsigned int partition(int a[], unsigned int izq, unsigned int der) {
  * Note: partition return uint asserting lft <= ppiv <= rgt
  * We don't have to check izq <= ppiv because quick_sort_rec takes ppiv -1
  * IDEM with der <= ppiv.
+ * Also is not necessay to check der > izq or izq >= der because the arguments
+ * that quick_sort passes asure it.
  */
 static void quick_sort_rec(int a[], unsigned int izq, unsigned int der, unsigned int length) {
-    if (izq >= der)
-        return;
-
     (void)length;
     #ifdef DEBUG
     printf("BEFORE:\n"); array_dump(a, length);
