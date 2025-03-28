@@ -42,22 +42,21 @@ bool fstring_eq(fixstring s1, fixstring s2) {
 /*
  * Check if s1 is smaller alphabeticaly than s2
  * We will iterate with the smallest string.
- * If the first character of s1 is smaller than the first of s2 then s1 smaller;
- * If not check if are bigger, if it's then s1 is not smaller.
- * And if not then obviously are equal and loop until end or find the smaller.
- * If the strings are equal it will end the loop without a return, so strings
+ * Check if characters are differents.
+ * If they're, then return the true if char from s1 is smaller, or false if not.
+ * If are equal, loop until end or until find a different pair.
+ * If strings are full equal it will end the loop without a return, so strings
  * are equal or there are a prefix. End checking if s1 is less or equal than s2,
  * if it's then it's smaller or prefix, if not then s2 it's prefix.
  */
 bool fstring_less_eq(fixstring s1, fixstring s2) {
     unsigned int length_s1 = fstring_length(s1),
-                 length_s2 = fstring_length(s2);
+                 length_s2 = fstring_length(s2),
+                 min_length = (length_s1 < length_s2) ? length_s1 : length_s2;
 
-    for (unsigned int i = 0; i < length_s1 && i < length_s2; i++) {
-        if (s1[i] < s2[i])
-            return true;
-        if (s1[i] > s2[i])
-            return false;
+    for (unsigned int i = 0; i < min_length; i++) {
+        if (s1[i] != s2[i])
+            return s1[i] < s2[i];
     }
 
     return length_s1 <= length_s2;
