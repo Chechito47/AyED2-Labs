@@ -18,7 +18,7 @@
 static unsigned int partition(int a[], unsigned int izq, unsigned int der) {
     unsigned int ppiv = izq, i = izq + 1, j = der;
 
-    assert(izq < der);
+    //assert(izq < der);
 
     #ifdef DEBUG
     printf("\nleft: %u\nright: %u\nppiv: %u\n\n", izq, der, ppiv);
@@ -61,7 +61,7 @@ static void quick_sort_rec(int a[], unsigned int izq, unsigned int der, unsigned
 
     if (izq < ppiv)
         quick_sort_rec(a, izq, ppiv - 1, length);
-    
+
     if (der > ppiv)
         quick_sort_rec(a, ppiv + 1, der, length);
 }

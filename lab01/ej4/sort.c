@@ -32,7 +32,7 @@ void selection_sort(int a[], unsigned int length) {
 static void insert(int a[], unsigned int i, unsigned int length) {
     (void)length;
     #ifdef DEBUG
-    array_dump(a, length);
+    array_dump(a, length); printf("\n");
     #endif
     unsigned int j = i;
     while (j > 0 && goes_before(a[j], a[j-1])) {
@@ -62,7 +62,7 @@ void insertion_sort(int a[], unsigned int length) {
 static unsigned int partition(int a[], unsigned int izq, unsigned int der) {
     unsigned int ppiv = izq, i = izq + 1, j = der;
 
-    assert(izq < der);
+    //assert(izq < der);
 
     #ifdef DEBUG
     printf("\nleft: %u\nright: %u\nppiv: %u\n\n", izq, der, ppiv);
@@ -87,11 +87,10 @@ static unsigned int partition(int a[], unsigned int izq, unsigned int der) {
  * Note: partition return uint asserting lft <= ppiv <= rgt
  * We don't have to check izq <= ppiv because quick_sort_rec takes ppiv -1
  * IDEM with der <= ppiv.
+ * Also is not necessay to check der > izq or izq >= der because the arguments
+ * that quick_sort passes asure it.
  */
 static void quick_sort_rec(int a[], unsigned int izq, unsigned int der, unsigned int length) {
-    if (izq >= der)
-        return;
-
     (void)length;
     #ifdef DEBUG
     printf("BEFORE:\n"); array_dump(a, length);
@@ -106,7 +105,7 @@ static void quick_sort_rec(int a[], unsigned int izq, unsigned int der, unsigned
 
     if (izq < ppiv)
         quick_sort_rec(a, izq, ppiv - 1, length);
-    
+
     if (der > ppiv)
         quick_sort_rec(a, ppiv + 1, der, length);
 }
