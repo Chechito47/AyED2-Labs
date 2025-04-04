@@ -21,7 +21,7 @@ unsigned int fstring_length(fixstring s) {
 /*
  * Check if two strings has the same content.
  * Iterates checking character by character if are equal or if they are '\0'.
- * If are not the same character, return false, if not return true
+ * If are not the same character, return false, if are the same return true
  */
 bool fstring_eq(fixstring s1, fixstring s2) {
     unsigned int i = 0;

@@ -45,6 +45,9 @@ bool fstring_less_eq(fixstring s1, fixstring s2) {
     return s1[i] <= s2[i];
 }
 
+/*
+ * Works as a swap function but it uses fixstring type
+ */
 void fstring_set(fixstring s1, const fixstring s2) {
     int i=0;
     while (i<FIXSTRING_MAX && s2[i]!='\0') {
@@ -54,6 +57,9 @@ void fstring_set(fixstring s1, const fixstring s2) {
     s1[i] = '\0';
 }
 
+/*
+ * Equivalent to use unsigned int but it only takes two arguments fixstring type
+ */
 void fstring_swap(fixstring s1,  fixstring s2) {
     fixstring aux;
     fstring_set(aux, s1);

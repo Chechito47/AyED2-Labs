@@ -7,6 +7,9 @@
 #include "sort_helpers.h"
 #include "fixstring.h"
 
+/*
+ * Equivalent to use unsigned int with a[]
+ */
 void swap(fixstring a[], unsigned int i, unsigned int j) {
     fixstring aux;
     fstring_set(aux, a[i]);
@@ -14,8 +17,14 @@ void swap(fixstring a[], unsigned int i, unsigned int j) {
     fstring_set(a[j], aux);
 }
 
+/*
+ * It will depend on how we wanna sort
+ */
 bool goes_before(fixstring x, fixstring y) {
+    //Alphabeticaly
     return fstring_less_eq(x, y);
+
+    //Length
     //return fstring_length(x) <= fstring_length(y);
 }
 
