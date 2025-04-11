@@ -3,7 +3,7 @@
 #include "cima_log.h"
 
 #define MAX_LENGTH 10
-#define N_TESTCASES_CIMA 1
+#define N_TESTCASES_CIMA 6
 
 int main() {
     struct testcase {
@@ -14,9 +14,11 @@ int main() {
 
     struct testcase tests[N_TESTCASES_CIMA] = {
         { {8}, 1, 0 },
-
-        // COMPLETAR!!
-
+        { {0}, 1, 0 },
+        { {2, 4}, 2, 1},
+        { {4, 2}, 2, 0 },
+        { {1, 2, 3, 4, 1}, 5, 3 },
+        { {3, 4, 2}, 3, 1 },
     };
     int result;
 

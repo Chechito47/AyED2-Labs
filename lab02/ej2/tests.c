@@ -4,7 +4,7 @@
 
 #define MAX_LENGTH 10
 #define N_TESTCASES_TIENE_CIMA 10
-#define N_TESTCASES_CIMA 1
+#define N_TESTCASES_CIMA 10
 
 void test_tiene_cima(void);
 void test_cima(void);
@@ -64,9 +64,15 @@ void test_cima(void) {
     struct testcase tests[N_TESTCASES_CIMA] = {
         //arreglo, largo, resultado esperado
         { {8}, 1, 0 },
-
-        // COMPLETAR!!
-
+        { {1, 2, 3, 1}, 4, 2 },
+        { {3, 4, 2}, 3, 1 },
+        { {4, 5, 4}, 3, 1 },
+        { {4, 5, 4, 3, 2}, 5, 1 },
+        { {0, 1, 0}, 3, 1 },
+        { {1, 2, 3, 2, 1}, 5, 2 },
+        { {2}, 1, 0 },
+        { {0}, 1, 0 },
+        { {10, 11, 10}, 3, 1 },
     };
     int result;
 

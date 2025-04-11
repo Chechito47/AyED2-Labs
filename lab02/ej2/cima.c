@@ -43,10 +43,10 @@ bool tiene_cima(int a[], int length) {
  * @param length Largo del arreglo.
  */
 int cima(int a[], int length) {
-    int cima = a[0];
+    int cima = 0;
     for (int i=1; i < length-1; i++)
         if (a[i] > a[i-1])
-            cima = a[i];
+            cima = i;
 
     return cima;
 }

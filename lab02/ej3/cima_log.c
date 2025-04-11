@@ -16,8 +16,18 @@
  * @param length Largo del arreglo.
  */
 int cima_log(int a[], int length) {
+    int lft = 0, rgt = length-1, mid;
+    if (lft > rgt)
+        return 0;
 
-    // COMPLETAR!!
-
+    while (lft <= rgt) {
+        mid = (lft + rgt)/2;
+        if (a[mid-1] < a[mid] && a[mid] > a[mid+1])
+            return mid;
+        else if (a[mid-1] > a[mid] && a[mid-1] > a[mid+1])
+            rgt = mid -1;
+        else if (a[mid+1] > a[mid] && a[mid+1] > a[mid-1])
+            lft = mid +1;
+    }
     return 0;
 }
