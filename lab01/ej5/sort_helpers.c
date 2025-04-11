@@ -11,10 +11,11 @@
  * Equivalent to use unsigned int with a[]
  */
 void swap(fixstring a[], unsigned int i, unsigned int j) {
-    fixstring aux;
-    fstring_set(aux, a[i]);
-    fstring_set(a[i], a[j]);
-    fstring_set(a[j], aux);
+    //fixstring aux;
+    //fstring_set(aux, a[i]);
+    //fstring_set(a[i], a[j]);
+    //fstring_set(a[j], aux);
+    fstring_swap(a[i], a[j]);
 }
 
 /*
