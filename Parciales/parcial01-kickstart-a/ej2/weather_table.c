@@ -10,27 +10,6 @@
 #include "weather_table.h"
 
 /**
- * @brief Write the content of the table 'a' into stdout.
- * @param[in] a table to dump in stdout
- */
-void table_dump(WeatherTable a) {
-    for (unsigned int year = 0u; year < YEARS; ++year) {
-        for (month_t month = january; month <= december; ++month) {
-            for (unsigned int day = 0u; day < DAYS; ++day) {
-                // imprimir año, mes y día
-                fprintf(stdout, "%u %u %u ", year + FST_YEAR, month + 1, day + 1);
-
-                // imprimir datos para ese día
-                weather_to_file(stdout, a[year][month][day]);
-
-                // imprimir salto de línea
-                fprintf(stdout, "\n");
-            }
-        }
-    }
-}
-
-/**
  * @brief reads a table of weather information from file
  * @details
  *
@@ -64,16 +43,9 @@ void table_from_file(WeatherTable a, const char *filepath) {
             exit(EXIT_FAILURE);
         }
 
-        // Ir a la función 'weather_from_file' en weather.c y completar!
         Weather weather = weather_from_file(file);
 
-        // También completar acá:
-        // Guardar la medición de clima en el arreglo multidimensional.
         a[k_year-FST_YEAR][k_month-1][k_day-1] = weather;
-        //Luego en cada posicion, ejemplo a[0][0][0] tendriamos:
-        //a[0][0][0]._average_temp
-        //a[0][0][0]._max_temp
-        //Y asi con los demas, para no hacer eso campo a campo se usa weather
     }
 
     fclose(file);

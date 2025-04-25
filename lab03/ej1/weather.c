@@ -8,10 +8,17 @@
 Weather weather_from_file(FILE* file)
 {
     Weather weather;
-    int aux = fscanf(file, " %d %d %d %u %u %u ", &weather._average_temp, &weather._max_temp, &weather._min_temp,
-              &weather._pressure, &weather._moisture, &weather._rainfall);
+
+    int aux = fscanf(file, " %d %d %d %u %u %u ",
+                           &weather._average_temp,
+                           &weather._max_temp,
+                           &weather._min_temp,
+                           &weather._pressure,
+                           &weather._moisture,
+                           &weather._rainfall);
+
     if (aux != 6) {
-      fprintf(stderr, "Invalid arguments number of weather");
+      fprintf(stderr, "Invalid table format\n");
       exit(EXIT_FAILURE);
     }
 

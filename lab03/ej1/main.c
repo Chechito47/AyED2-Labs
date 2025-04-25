@@ -10,6 +10,7 @@
 
 /* Then, this project's includes, alphabetically ordered */
 #include "weather_table.h"
+#include "weather_utils.h"
 
 /**
  * @brief print usage help
@@ -71,6 +72,25 @@ int main(int argc, char *argv[]) {
 
     /* show the table in the screen */
     table_dump(table);
+
+    int min=lowest_temp_hist(table); //As array_dumb only need to pass array, not WeatherTable array
+    float min_cel=min;
+    printf("\n\nThe historical lowest temperature is: %d => %.1f°C\n", min, min_cel/10);
+
+
+    unsigned int res[YEARS];
+    highest_temp_year(table, res);
+    for (unsigned int i=0; i<YEARS; i++) {
+        float max_cel=res[i];
+        printf("\nThe highest temperature in %d is: %d => %.1f°C", i+1980, res[i], max_cel/10);
+    }
+
+    printf("\n");
+    month_t res2[YEARS];
+    most_rain_year(table, res2);
+    for (unsigned int i=0; i<YEARS; i++) {
+        printf("\nThe month with most rains in %d is: %d", i+1980, res2[i]+1);
+    }
 
     return EXIT_SUCCESS;
 }
