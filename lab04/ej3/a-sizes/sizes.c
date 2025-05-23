@@ -4,8 +4,7 @@
 
 #include "data.h"
 
-void
-print_data(data_t d) {
+void print_data(data_t d) {
     printf("NOMBRE: %s\n"
            "EDAD  : %d años\n"
            "ALTURA: %d cm\n\n",
@@ -25,7 +24,7 @@ int main(void) {
            sizeof(messi.name),
            sizeof(messi.age),
            sizeof(messi.height),
-           sizeof(messi.name) + sizeof(messi.age) + sizeof(messi.height));
+           sizeof(data_t));
 
     //Memory address
     printf("\n\nname-memory address  : %p\n"
@@ -42,10 +41,10 @@ int main(void) {
            "age-index   : %lu bytes\n"
            "height-index: %lu bytes\n"
            "data_t-index: %lu bytes\n",
-           (uintptr_t) messi.name,
-           (uintptr_t) messi.age,
-           (uintptr_t) messi.height,
-           (uintptr_t) messi.name + messi.age + messi.height);
+           (uintptr_t) &messi.name,
+           (uintptr_t) &messi.age,
+           (uintptr_t) &messi.height,
+           (uintptr_t) &messi);
 
     return EXIT_SUCCESS;
 }

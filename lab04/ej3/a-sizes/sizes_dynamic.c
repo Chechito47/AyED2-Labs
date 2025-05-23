@@ -5,8 +5,7 @@
 
 #include "data.h"
 
-void
-print_data(data_t d) {
+void print_data(data_t d) {
     printf("NOMBRE: %s\n"
            "EDAD  : %d años\n"
            "ALTURA: %d cm\n\n",
@@ -17,8 +16,10 @@ int main(void) {
 
     //Ask for memory
     data_t *messi = malloc(sizeof(*messi));
-    if (messi == NULL)
-        return EXIT_FAILURE;
+    if (!messi) {
+       perror("malloc failed");
+       return EXIT_FAILURE;
+    }
 
     //Initilize values
     strcpy(messi->name, "Leo Messi");
@@ -36,7 +37,7 @@ int main(void) {
            sizeof(messi->name),
            sizeof(messi->age),
            sizeof(messi->height),
-           sizeof(messi->name) + sizeof(messi->age) + sizeof(messi->height));
+           sizeof(data_t));
 
     //Memory address
     printf("\n\nname-memory address  : %p\n"
@@ -53,12 +54,20 @@ int main(void) {
            "age-index   : %lu\n"
            "height-index: %lu\n"
            "data_t-index: %lu\n",
-           (uintptr_t) messi->name,
-           (uintptr_t) messi->age,
-           (uintptr_t) messi->height,
-           (uintptr_t) messi->name + messi->age + messi->height);
+           (uintptr_t) &messi->name,
+           (uintptr_t) &messi->age,
+           (uintptr_t) &messi->height,
+           (uintptr_t) &messi);
 
     free(messi);
 
     return EXIT_SUCCESS;
 }
+
+/*
+       To add pointers just declarate the data_t value with *
+              and ask for memory. Then initialize all of the
+              components with ->. Also for the print use * because 
+              print don't take pointers as argument.
+       End with free.
+*/

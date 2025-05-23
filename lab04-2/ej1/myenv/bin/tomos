@@ -1,0 +1,10 @@
+#!/bin/sh
+'''exec' "/home/lautaro/Documents/2025/Cuatrimestre I/Algoritmos y Estructuras de Datos II/Labs/lab04-2/ej1/myenv/bin/python3.12" "$0" "$@"
+' '''
+# -*- coding: utf-8 -*-
+import re
+import sys
+from tomos.ui.cli import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

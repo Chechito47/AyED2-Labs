@@ -14,16 +14,33 @@ int main(void) {
     char ignore_chars[] = {' ', '?', '!', ',', '-', '.'};
     char *filtered=NULL;
 
+    //Change scanf to fgets
     printf("Ingrese un texto (no más de %d símbolos) para verificar palíndromo: ", MAX_LENGTH);
-    scanf("%s", user_input);
+    if (fgets(user_input, MAX_LENGTH, stdin) == NULL) {
+        fprintf(stderr, "fgets error");
+        return EXIT_FAILURE;
+    }
+
+    //Delete \n. If we dont do this is not gonna work
+    size_t length = string_length(user_input);
+    if (length > 0 && user_input[length-1] == '\n') {
+        user_input[length-1] = '\0';
+    }
+
+    //To avoid memory leak need to use an auxiliar pointer
     filtered = string_filter(user_input, ignore_chars[0]);
     for (unsigned int i=0; i < SIZEOF_ARRAY(ignore_chars); i++) {
-        filtered = string_filter(filtered, ignore_chars[i]);
+        char *aux = string_filter(filtered, ignore_chars[i]);
+        free(filtered);
+        filtered = aux;
     }
 
     printf("El texto:\n\n"
             "\"%s\" \n\n"
             "%s un palíndromo.\n\n", user_input, string_is_symmetric(filtered) ? "Es": "NO es");
+
+    //Free memory
+    free(filtered);
     return EXIT_SUCCESS;
 }
 

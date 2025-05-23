@@ -5,9 +5,18 @@
 
 #define MAX_LENGTH 1820
 
+//Need to ask for memory, if not the string will only be local to this fuction
 char *string_clone(const char *str, size_t length) {
-    char clon[MAX_LENGTH];
-    char *output=clon;
+    if (!str)
+        return NULL;
+
+    //Ask for memory
+    char *output = malloc(length + 1);
+    if (!output) {
+        fprintf(stderr, "malloc error");
+        return NULL;
+    }
+
     for (size_t i=0; i<length;i++) {
         output[i] = str[i];
     }
@@ -54,9 +63,12 @@ int main(void) {
          "                an    ARMY    OF   THE   REPUBLIC\n"
          "                to    assist    the   overwhelmed\n"
          "                Jedi....\n" ANSI_WHITE;
+
+    //Clone original string using string clone modified
     char *copy=NULL;
 
     copy = string_clone(original, sizeof(original)/sizeof(*original));
+
     printf("Original:\n" ANSI_CYAN
             " %s\n", original);
     copy[0] = 'A';
@@ -68,6 +80,15 @@ int main(void) {
     printf("Copia   :\n" ANSI_CYAN
            " %s\n", copy);
 
+    free(copy);
     return EXIT_SUCCESS;
 }
 
+/*
+    We where using a function with a pointer without asking for memory. That's
+    ok on local functions but in output we have the clone of original but when
+    the function ends that memory dissappear because we is not managed by us.
+    To solve that just ask memory for output.
+
+    Length value is 1812, we can also see this in char original.
+*/
