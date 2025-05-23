@@ -82,3 +82,19 @@ Dada una posicion y un valor, introduce un nodo nuevo con esos datos en la lista
 Declara enteros para la nueva informacion y la posicion, punteros para recorrer hasta la posicion nueva y otro para introducir los valores del nodo nuevo. Nos salteamos hasta llegar a la posicion en la que queremos introducir el nuevo nodo.  
 Al llegar a esa posicion pedimos memoria para un nodo e indicamos que el data es el que habiamos declarado y el next es el siguiente que correspondia cuando hicimos el corte para agregar este nuevo nodo. Si no habia elementos antes tambien hacemos que sea el primero de la lista.  
 Por ultimo hacemos que los punteros sean null para evitar referencias colgantes
+
+# remove_first_data.ayed
+## ¿Que hace?
+Busca y elimina la primera aparacion de un nodo cuyo campo data coincida con el valor dado en **to_remove**.
+
+## ¿Como lo hace?
+Primero declaramos algunas variables, entre ellas **to_remove** donde tenemos valor del entero que queremos borrar, un puntero **a_node** con el que recorremos la lista y un puntero auxiliar **aux** para guardar el nodo anterior de a_node.  
+Iteramos hasta llegar al final (sin encontrar el to_remove) o hasta que lo encontramos. En cada iteracion guardamos en aux el nodo anterior a a_node para que al encontrar el to_remove apunte al nodo anterior al que queremos borrar.  
+Luego simplemente vemos si efectivamente el bucle termino porque encontramos el nodo a borrar, si lo hizo salteamos el nodo a_node, liberamos la memoria del nodo liberado y lo declaramos NULL  
+Por ejemplo, tenemos esta lista:  
+[10] → [20] → [30] → [40] → null y queremos eliminar el data=30. Esto resulta:  
+[10] → [20] --------> [40] → null  
+                free([30])
+
+# remove_not_found.ayed
+## ¿Que hace?
