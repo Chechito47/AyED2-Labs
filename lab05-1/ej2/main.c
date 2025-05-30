@@ -37,10 +37,14 @@ char *parse_filepath(int argc, char *argv[]) {
     return (result);
 }
 
+//With valgrind we can see is necessary to res = the return and destroy c,
+    //if not it will be a memory leak
 bool matching_parentheses(FILE * file) {
     counter c = NULL;
     bool balanced = true;
     char letter;
+
+    c = counter_init();
 
     while (!feof(file) && balanced) {
         letter = fgetc(file);
@@ -52,7 +56,10 @@ bool matching_parentheses(FILE * file) {
             counter_dec(c);
         }
     }
-    return (balanced && counter_is_init(c));
+    bool res = (balanced && counter_is_init(c));
+    counter_destroy(c);
+
+    return res;
 }
 
 int main(int argc, char *argv[]) {
