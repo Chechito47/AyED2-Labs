@@ -6,6 +6,8 @@
 #define N_TESTCASES_TAIL 3
 #define N_TESTCASES_ADDR 4
 #define N_TESTCASES_TAKE 5
+#define N_TESTCASES_DROP 4
+#define N_TESTCASES_CONCAT 4
 
 // construye una lista a partir de un arreglo
 // (usa los constructores de lista empty y addl)
@@ -181,10 +183,112 @@ void test_take() {
     }
 }
 
+// Testeo de la función drop()
+void test_drop() {
+    // representación de un solo caso de test
+    struct drop_testcase {
+        int a[MAX_LENGTH];       // elementos de la lista de entrada
+        int length;              // largo de la lista de entrada
+        int n;                  // cant elementos a eliminar
+        int result[MAX_LENGTH];  // elementos esperados de la lista resultado
+        int result_length;       // largo esperado de la lista resultado
+    };
+
+    // casos de test (uno por línea)
+    struct drop_testcase tests[N_TESTCASES_DROP] = {
+      { {8, 1, -2}, 3, 1, {1, -2}, 2 },  // testea: drop([8, 1, -2], 1) == [1, -2]
+      { {1, -2}, 2, 2, {}, 0 },        // testea: drop([1, -2], 2) == []
+      { {-2}, 1, 0, {-2}, 1 },              // testea: drop([-2], 0) == [-2]
+      { {8, 1}, 2, 1, {1}, 1 },                    // testea: drop([8, 1], 1) == [1]
+    };
+
+    list input;
+    list result, expected_result;
+
+    printf("TESTING drop\n");
+
+    for (int i=0; i < N_TESTCASES_DROP; i++) {
+        printf("Test case %i: ", i+1);
+
+        // creamos la lista de entrada
+        input = array_to_list(tests[i].a, tests[i].length);
+
+        // TEST! llamamos la función a testear
+        result = drop(input, tests[i].n);
+
+        // creamos la lista resultado esperada
+        expected_result = array_to_list(tests[i].result, tests[i].result_length);
+
+        // comparamos resultado obtenido con resultado esperado
+        if (is_equal_to(result, expected_result)) {
+            printf("OK\n");
+        } else {
+            printf("FAILED\n");
+        }
+
+        destroy_list(result);
+        destroy_list(expected_result);
+    }
+}
+
+// Testeo de la función concat()
+void test_concat() {
+    // representación de un solo caso de test
+    struct concat_testcase {
+        int a[MAX_LENGTH];       // elementos de la lista de entrada
+        int length;              // largo de la lista de entrada
+        int aux[MAX_LENGTH];     // elementos de la lista a agregar
+        int aux_length;          // largo de la lista a agregar
+        int result[MAX_LENGTH];  // elementos esperados de la lista resultado
+        int result_length;       // largo esperado de la lista resultado
+    };
+
+    // casos de test (uno por línea)
+    struct concat_testcase tests[N_TESTCASES_CONCAT] = {
+      { {8, 1, -2}, 3, {1, 2}, 2, {8, 1, -2, 1, 2}, 5 },  // testea: concat([8, 1, -2], [1, 2]) == [8, 1, -2, 1, 2]
+      { {8, 1, -2}, 3, {}, 0, {8, 1, -2}, 3 },  // testea: concat([8, 1, -2], []) == [8, 1, -2]
+      { {8, 1, -2}, 3, {1}, 1, {8, 1, -2, 1}, 4 },  // testea: concat([8, 1, -2], [1]) == [8, 1, -2, 1]
+      { {8, 1, -2}, 3, {1, 2, 3}, 3, {8, 1, -2, 1, 2, 3}, 6 },  // testea: concat([8, 1, -2], [1, 2, 3]) == [8, 1, -2, 1, 2, 3]
+    };
+
+    list input, aux_input;
+    list result, expected_result;
+
+    printf("TESTING concat\n");
+
+    for (int i=0; i < N_TESTCASES_CONCAT; i++) {
+        printf("Test case %i: ", i+1);
+
+        // creamos la lista de entrada
+        input = array_to_list(tests[i].a, tests[i].length);
+
+        // creamos la segunda lista de entrada
+        aux_input = array_to_list(tests[i].aux, tests[i].aux_length);
+
+        // TEST! llamamos la función a testear
+        result = concat(input, aux_input);
+
+        // creamos la lista resultado esperada
+        expected_result = array_to_list(tests[i].result, tests[i].result_length);
+
+        // comparamos resultado obtenido con resultado esperado
+        if (is_equal_to(result, expected_result)) {
+            printf("OK\n");
+        } else {
+            printf("FAILED\n");
+        }
+
+        destroy_list(result);
+        destroy_list(expected_result);
+    }
+}
+
 int main() {
     test_tail();
     test_addr();
     test_take();
+    test_drop();
+    test_concat();
 
     return 0;
 }

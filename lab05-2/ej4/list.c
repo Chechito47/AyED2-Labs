@@ -93,7 +93,7 @@ list concat(list l, list l0) {
         l = l0;
     } else {
         list aux = l;
-        while (aux != NULL) {
+        while (aux->next != NULL) {
             aux = aux->next;
         }
         aux->next = l0;
@@ -141,17 +141,16 @@ list take(list l, int n) {
 list drop(list l, int n) {
     list aux = l;
 
-    if (n > length(l)) {
+   if (n >= length(l)) {
         destroy_list(l);
-        aux = NULL;
-    } else {
-        list aux2 = aux;
-        while (n != 0) {
-            free(aux);
-            aux = aux2;
-            aux2 = aux2->next;
-            n--;
-        }
+        return NULL;
+    }
+
+    while (n > 0 && aux != NULL) {
+        list aux2 = aux->next;
+        free(aux);
+        aux = aux2;
+        n--;
     }
 
     return aux;
@@ -181,4 +180,5 @@ void destroy_list(list l) {
         l = l->next;
         free(aux);
     }
+    aux = NULL;
 }
